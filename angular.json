@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/scss/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,6 +121,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "untitled1"
 }
