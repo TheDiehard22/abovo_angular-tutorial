@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  @apply bg-background;
+}
+
+.page {
+  @apply w-full flex;
+}
+
+.card {
+  @apply shadow-lg rounded;
+}
+
+.heading {
+  @apply font-bold text-2xl tracking-wide text-white;
+}

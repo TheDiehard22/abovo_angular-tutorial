@@ -1,27 +1,28 @@
-const WebpackNotifierPlugin = require('webpack-notifier');
 const path = require('path');
 
-module.exports = {
-    module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                loader: 'postcss-loader',
-                options: {
-                    ident: 'postcss',
-                    plugins: () => [
-                        require('tailwindcss'),
-                        require('autoprefixer'),
-                    ]
-                }
-            }
-        ]
-    },
-    plugins: [
-        new WebpackNotifierPlugin({
-            alwaysNotify: true,
-            title: 'App Name',
-            //   contentImage: path.join(__dirname, 'image.png')
-        }),
+const purgecss = require('@fullhuman/postcss-purgecss')({
+  content: [
+    './src/**/*.html',
+  ],
+  defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+});
+
+module.exports = (config, options) => {
+  console.log(`Using '${config.mode}' mode`);
+  config.module.rules.push({
+    test: /tailwind\.scss$/,
+    use: [
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: [
+            require('tailwindcss'),
+            require('autoprefixer'),
+            ...(config.mode === 'production' ? [purgecss] : [])
+          ]
+        }
+      }
     ]
+  });
+  return config;
 };

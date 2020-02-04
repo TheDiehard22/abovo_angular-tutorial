@@ -1,0 +1,13 @@
+<nav class="w-40 flex flex-col justify-center h-full px-2">
+  <ul class="text-center">
+    <li class="mb-4" *ngFor="let route of routes">
+      <a
+        class="text-sm uppercase p-2 text-white"
+        [href]="route.href"
+        routerLink
+      >
+        {{ route.name }}
+      </a>
+    </li>
+  </ul>
+</nav>
