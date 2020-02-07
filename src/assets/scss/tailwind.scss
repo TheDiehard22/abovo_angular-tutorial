@@ -44,13 +44,13 @@ body {
 
 $untitled1-primary: mat-palette($mat-indigo);
 $untitled1-accent: mat-palette($mat-pink, A200, A100, A400);
-
+$color: $light-primary-text;
 $untitled1-warn: mat-palette($mat-red);
 
-$untitled1-theme: mat-light-theme(
+$base-theme: mat-dark-theme(
   $untitled1-primary,
   $untitled1-accent,
   $untitled1-warn
 );
 
-@include angular-material-theme($untitled1-theme);
+@include angular-material-theme($base-theme);

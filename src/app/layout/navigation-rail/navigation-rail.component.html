@@ -1,15 +1,33 @@
 <nav class="w-40 flex flex-col justify-center h-full px-2">
+  <div class="flex-grow"></div>
+
   <ul class="text-center">
     <li class="mb-4" *ngFor="let route of routes">
       <a
         class="flex flex-col items-center text-sm uppercase p-2 text-white"
         [routerLink]="route.href"
         routerLinkActive="text-primary"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{
+          exact: route.id != 'settings' ? true : false
+        }"
       >
         <mat-icon>{{ route.icon }}</mat-icon>
-        {{ route.name }}
+        <span class="text-xs font-medium tracking-widest mt-2">
+          {{ route.name }}
+        </span>
       </a>
     </li>
   </ul>
+
+  <div class="flex-grow"></div>
+
+  <div
+    [matMenuTriggerFor]="menu"
+    class="rounded-full h-10 w-10 bg-white self-center mb-6"
+  ></div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onLogin()">
+      {{ loggedIn ? 'Log out' : 'Log in' }}
+    </button>
+  </mat-menu>
 </nav>

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +11,7 @@ import { NavigationRailComponent } from './layout/navigation-rail/navigation-rai
 import { HomeComponent } from './views/home/home.component';
 import { SocialMediaComponent } from './views/social-media/social-media.component';
 import { SettingsComponent } from './views/settings/settings.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { WeatherCardComponent } from './components/weather-card/weather-card.component';
@@ -24,12 +24,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'social-media', component: SocialMediaComponent },
-  { path: 'settings', component: SettingsComponent },
-];
+import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { LinkedAccountsComponent } from './views/settings/linked-accounts/linked-accounts.component';
 
 registerLocaleData(localeNl);
 
@@ -40,26 +41,27 @@ registerLocaleData(localeNl);
     HomeComponent,
     SocialMediaComponent,
     SettingsComponent,
+    NotFoundComponent,
     ToolbarComponent,
     WeatherCardComponent,
     TodoCardComponent,
     TwitterFeedComponent,
     TwitterCardComponent,
     RippleDirective,
+    LinkedAccountsComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false }, //TODO: only in prod
-    ),
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatCheckboxModule,
+    MatMenuModule,
+    MatListModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

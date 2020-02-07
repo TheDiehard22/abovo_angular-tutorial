@@ -1,3 +1,13 @@
 <div class="max-w-2xl flex-grow py-20">
   <h1 class="heading">Settings</h1>
+  <mat-list role="list" class="text-white">
+    <h3 matSubheader>General</h3>
+    <mat-list-item role="listitem" routerLink="linked-accounts">
+      Linked accounts
+      <div class="flex-grow"></div>
+      <mat-icon>chevron_right</mat-icon>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
 </div>
+<router-outlet></router-outlet>
