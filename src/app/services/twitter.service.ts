@@ -11,6 +11,8 @@ const config = {
   callbackUri: 'http://localhost:4200/callback',
 };
 
+//https://auth0.com/authenticate/angular2/twitter/
+
 @Injectable({
   providedIn: 'root',
 })
