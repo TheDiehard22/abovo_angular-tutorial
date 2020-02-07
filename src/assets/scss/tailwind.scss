@@ -19,3 +19,38 @@ body {
 .heading {
   @apply font-bold text-2xl tracking-wide text-white;
 }
+
+.ripple {
+  background-position: center;
+  transition: background 0.6s;
+
+  &:not(.ripple--active):hover {
+    background: radial-gradient(
+        circle,
+        transparent 1%,
+        theme('colors.background.dark') 1%
+      )
+      center/15000%;
+  }
+
+  &--active {
+    background-size: 100%;
+  }
+}
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$untitled1-primary: mat-palette($mat-indigo);
+$untitled1-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$untitled1-warn: mat-palette($mat-red);
+
+$untitled1-theme: mat-light-theme(
+  $untitled1-primary,
+  $untitled1-accent,
+  $untitled1-warn
+);
+
+@include angular-material-theme($untitled1-theme);

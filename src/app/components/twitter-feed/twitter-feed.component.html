@@ -1,0 +1,15 @@
+<div class="card flex flex-col bg-background-light text-white p-4">
+  <div>
+    <span class="heading block">Twitter feed</span>
+    <span class="text-sm">
+      Streaming from 0 accounts. <a class="underline" href="#">edit</a>
+    </span>
+  </div>
+  <div class="mt-6">
+    <base-twitter-card
+      *ngFor="let card of twitterCards"
+      [data]="card"
+      class="mb-4 block"
+    ></base-twitter-card>
+  </div>
+</div>

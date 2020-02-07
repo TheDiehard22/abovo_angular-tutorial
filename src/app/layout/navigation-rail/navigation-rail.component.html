@@ -2,10 +2,12 @@
   <ul class="text-center">
     <li class="mb-4" *ngFor="let route of routes">
       <a
-        class="text-sm uppercase p-2 text-white"
-        [href]="route.href"
-        routerLink
+        class="flex flex-col items-center text-sm uppercase p-2 text-white"
+        [routerLink]="route.href"
+        routerLinkActive="text-primary"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
+        <mat-icon>{{ route.icon }}</mat-icon>
         {{ route.name }}
       </a>
     </li>

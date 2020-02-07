@@ -1,0 +1,20 @@
+<div
+  app-ripple
+  class="twitter-card flex shadow-md bg-background p-4 select-none mb-4"
+>
+  <div class="flex flex-col justify-between h-40 w-16 flex-shrink-0">
+    <img
+      class="rounded-full shadow-md h-16 w-16"
+      src="{{ data.profile_url }}"
+      alt="profile image"
+    />
+
+    <span class="text-xs text-gray-200 italic">22 min ago</span>
+  </div>
+  <div class="px-4">
+    <a class="text-gray-400 font-bold text-sm" href="#">{{ data.at_name }}</a>
+    <p>
+      {{ data.content }}
+    </p>
+  </div>
+</div>
