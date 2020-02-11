@@ -1,0 +1,22 @@
+<div
+  class="login-modal fixed top-0 left-0 w-full h-full bg-background-light flex justify-center items-center"
+>
+  <div class="w-1/2 bg-background p-6 shadow-lg rounded">
+    <h1 class="heading mb-2">Login to Google</h1>
+    <hr />
+    <form class="py-10" action="">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Username or e-mail</mat-label>
+        <input matInput placeholder="e-mail" value="" />
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput value="" />
+      </mat-form-field>
+      <div>
+        <button (click)="login()" class="" mat-raised-button>Login</button>
+        <!-- <button mat-stroked-button>Reset form</button> -->
+      </div>
+    </form>
+  </div>
+</div>

@@ -23,11 +23,12 @@
 
   <div
     [matMenuTriggerFor]="menu"
-    class="rounded-full h-10 w-10 bg-white self-center mb-6"
+    class="rounded-full h-10 w-10 bg-white self-center mb-6 bg-cover shadow-lg"
+    [style.background-image]="'url(' + userData[0]?.photoURL + ')'"
   ></div>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onLogin()">
-      {{ loggedIn ? 'Log out' : 'Log in' }}
+      {{ userData[0]?.uid ? 'Log out' : 'Log in' }}
     </button>
   </mat-menu>
 </nav>

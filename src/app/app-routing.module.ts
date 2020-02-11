@@ -1,23 +1,48 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { canActivate } from '@angular/fire/auth-guard';
+import {
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+  AngularFireAuthGuard,
+  AngularFireAuthGuardModule,
+} from '@angular/fire/auth-guard';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { HomeComponent } from './views/home/home.component';
 import { SocialMediaComponent } from './views/social-media/social-media.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
-import { AuthGuard } from './services/auth-guard.service';
 import { LinkedAccountsComponent } from './views/settings/linked-accounts/linked-accounts.component';
+import { LoginComponent } from './views/login/login.component';
+
+const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome },
+    // ...canActivate(redirectLoggedInToHome),
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    // ...canActivate(redirectUnauthorizedToLogin),
+  },
   {
     path: 'social-media',
-    canActivate: [AuthGuard],
+    // ...canActivate(redirectUnauthorizedToLogin),
     component: SocialMediaComponent,
   },
   {
     path: 'settings',
     component: SettingsComponent,
+    // ...canActivate(redirectUnauthorizedToLogin),
     children: [
       {
         path: 'linked-accounts',
@@ -36,6 +61,8 @@ const appRoutes: Routes = [
   //   NotFoundComponent,
   // ],
   imports: [
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }, //TODO: only in prod

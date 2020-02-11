@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { environment } from './../environments/environment';
 import localeNl from '@angular/common/locales/nl';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { NavigationRailComponent } from './layout/navigation-rail/navigation-rail.component';
@@ -26,11 +30,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { LinkedAccountsComponent } from './views/settings/linked-accounts/linked-accounts.component';
+import { LoginComponent } from './views/login/login.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 registerLocaleData(localeNl);
 
@@ -49,10 +58,15 @@ registerLocaleData(localeNl);
     TwitterCardComponent,
     RippleDirective,
     LinkedAccountsComponent,
+    LoginComponent,
+    ModalComponent,
+    AlertComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -60,6 +74,8 @@ registerLocaleData(localeNl);
     MatCheckboxModule,
     MatMenuModule,
     MatListModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],

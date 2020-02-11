@@ -14,14 +14,14 @@ export class AuthService {
     return promise;
   }
 
-  login() {
+  login(): boolean {
     this.loggedIn = true;
     this.loggedInStateChanged.next(this.loggedIn);
 
     return this.loggedIn;
   }
 
-  logout() {
+  logout(): boolean {
     this.loggedIn = false;
     this.loggedInStateChanged.next(this.loggedIn);
 
