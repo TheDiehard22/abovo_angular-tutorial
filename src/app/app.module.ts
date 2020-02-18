@@ -41,7 +41,16 @@ import { LoginComponent } from './views/login/login.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { AlertComponent } from './shared/alert/alert.component';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import * as fromApp from './store/app.reducer';
+import { AlertEffects } from './shared/alert/store/alert.effects';
+
 registerLocaleData(localeNl);
+
+// StoreModule.forFeature('alert', fromApp.appReducers);
 
 @NgModule({
   declarations: [
@@ -65,6 +74,9 @@ registerLocaleData(localeNl);
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    StoreModule.forRoot(fromApp.appReducers),
+    EffectsModule.forRoot([AlertEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     AngularFirestoreModule,
     AppRoutingModule,
     FormsModule,

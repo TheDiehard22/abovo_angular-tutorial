@@ -43,8 +43,8 @@ export class TwitterService implements OnInit {
     this.auth.auth
       .signInWithPopup(new auth.TwitterAuthProvider())
       .then(data => {
-        this.accessToken = data.credential.accessToken;
-        this.secret = data.credential.secret;
+        // this.accessToken = data.credential.accessToken;
+        // this.secret = data.credential.secret;
         this.twitterUser = data.user;
         this.loggedIn = true;
 

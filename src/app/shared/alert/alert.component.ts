@@ -7,19 +7,17 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { AlertService } from '../services/alert.service';
-import { Alert } from './../services/alert.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent {
   @Input() message: string;
   @Output() close = new EventEmitter<void>();
 
-  // constructor(private alert: AlertService) {}
+  constructor(private alert: AlertService) {}
 
   // ngOnInit() {
   //   this.subscription = this.alert.onAlert().subscribe(alert => {

@@ -17,7 +17,7 @@ export class RippleDirective implements OnInit {
     // this.$el.classList.add('ripple');
   }
 
-  @HostListener('click', ['$event.target']) onClick() {
+  @HostListener('click', ['$event.target']) onClick(): void {
     // this.$el.style.border = 'solid 1px red';
     // this.$el.classList.add('ripple--active');
     this.renderer.addClass(this.$el, 'ripple--active');

@@ -1,31 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertService } from './shared/services/alert.service';
-import { Alert } from './shared/services/alert.model';
-import { Observable, Subscription, interval } from 'rxjs';
-import { tap, timeout } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { AlertService } from "./shared/services/alert.service";
+import { Alert } from "./shared/alert/alert.model";
+import { Observable, Subscription, interval } from "rxjs";
+import { tap, timeout, map } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+
+import * as fromApp from "./store/app.reducer";
+import * as fromAlert from "./shared/alert/store/alert.actions";
+import { selectVisibleAlerts } from "./shared/alert/store/alert.selectors";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  constructor(private alert: AlertService) {}
-  alerts: Alert[] = [];
-  alert$: Subscription;
+  constructor(private store: Store<fromApp.AppState>) {}
+  // alerts: Observable<{ alerts: Alert[] }>;
+  alerts: Observable<Alert[]>;
 
   ngOnInit(): void {
-    this.alert$ = this.alert.onAlert().subscribe(alert => {
-      console.log('from app.comp', alert);
-      if (alert.message !== null) {
-        this.alerts.push(alert);
-      }
-
-      setInterval(() => {
-        this.alerts.splice(0, 1);
-      }, 4000);
-    });
+    // this.alerts = this.store.select(store => store.alert);
+    this.alerts = this.store.select(selectVisibleAlerts);
   }
 
-  onClose() {}
+  onClose(): void {
+    return;
+  }
 }

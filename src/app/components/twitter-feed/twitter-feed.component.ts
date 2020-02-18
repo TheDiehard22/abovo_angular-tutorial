@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
 import { TwitterCard } from '../reuse/twitter-card/twitter-post.model';
 import { TwitterService } from 'src/app/services/twitter.service';
 import { AlertService } from './../../shared/services/alert.service';
-import { Alert, AlertType } from 'src/app/shared/services/alert.model';
+
+import * as fromApp from '../../store/app.reducer';
+import * as fromAlertActions from './../../shared/alert/store/alert.actions';
+import { Alert, AlertType } from '../../shared/alert/alert.model';
 
 @Component({
   selector: 'app-twitter-feed',
@@ -18,18 +23,12 @@ export class TwitterFeedComponent {
       new Date(),
       'Every developer: we need to implement an email alert system to notify us if production crashes Every developer after the first crash: how do we turn off these email alerts?',
     ),
-    new TwitterCard(
-      'https://via.placeholder.com/100',
-      '123123123',
-      '@iamdevloper',
-      new Date(),
-      'Every developer: we need to implement an email alert system to notify us if production crashes Every developer after the first crash: how do we turn off these email alerts?',
-    ),
   ];
 
   constructor(
     private twitter: TwitterService,
     private alertService: AlertService,
+    private store: Store<fromApp.AppState>,
   ) {}
 
   onClick(): void {
@@ -45,13 +44,16 @@ export class TwitterFeedComponent {
   }
 
   showNotification(): void {
-    this.alertService.showAlert(
-      new Alert({
-        alertId: '1asd123',
-        message: 'message from je mama',
-        type: AlertType.Success,
-        keepAfterRouteChange: true,
-      }),
+    this.store.dispatch(
+      new fromAlertActions.AddAlert(
+        new Alert({
+          message: 'asd',
+          type: AlertType.Success,
+          alertId: '1',
+          timestamp: new Date(),
+          keepAfterRouteChange: true,
+        }),
+      ),
     );
   }
 }
