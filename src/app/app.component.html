@@ -4,7 +4,10 @@
   <main class="flex flex-grow py-12 px-6 pt-20">
     <router-outlet></router-outlet>
   </main>
-  <div class="alert-container absolute bottom-0 left-0 flex flex-col">
+  <div
+    [@listAnimation]="(alerts | async).length"
+    class="alert-container absolute bottom-0 left-0 flex flex-col"
+  >
     <!-- <app-alert
       *ngFor="let alert of (alerts | async).alerts"
       (close)="onClose(alert)"

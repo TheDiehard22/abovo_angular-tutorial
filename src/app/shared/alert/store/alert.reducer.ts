@@ -22,6 +22,7 @@ export function alertsReducer(
         ...state,
         alerts: [...state.alerts, action.payload],
       };
+
     case AlertActions.REMOVE_ALERT:
       return {
         ...state,

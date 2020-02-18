@@ -8,11 +8,50 @@ import { Store, select } from "@ngrx/store";
 import * as fromApp from "./store/app.reducer";
 import * as fromAlert from "./shared/alert/store/alert.actions";
 import { selectVisibleAlerts } from "./shared/alert/store/alert.selectors";
+import {
+  transition,
+  animate,
+  state,
+  style,
+  trigger,
+  query,
+  stagger,
+} from "@angular/animations";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
+  animations: [
+    trigger("listAnimation", [
+      transition("* <=> *", [
+        query(
+          ":enter",
+          [
+            style({ opacity: 0, transform: "translateX(-20px)" }),
+            stagger(
+              "60ms",
+              animate(
+                "600ms ease-out",
+                style({ opacity: 1, transform: "translateX(0)" }),
+              ),
+            ),
+          ],
+          { optional: true },
+        ),
+        query(
+          ":leave",
+          animate(
+            "200ms",
+            style({ opacity: 0, transform: "translateX(-100px)" }),
+          ),
+          {
+            optional: true,
+          },
+        ),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
